@@ -18,6 +18,7 @@ namespace TreeNodeSample.Controllers
         [HttpPost]
         public HttpResponseMessage Beem()
         {
+
             /*
              * User query param key to protect you can built a customer attribute to handle this
              */ 
@@ -44,8 +45,13 @@ namespace TreeNodeSample.Controllers
 
             /*
              * you can use session , cache , any to keep track of the session just using cache as an example but you can use any
-             */ 
+             */
 
+            // the USSDEngine is a routing framework to manage your request and response , know the menu and form you are at
+            // USSDEngine will soon add this to the nuget package manage 
+            // it then uses events to call your methods 
+            // basically you just build the menus , forms and events without need to worry about ussd callback logic 
+            // check Data.GetAppForm to see how to build a form
             USSDEngine uSSDSessionModel = CacheManager.GetCache<USSDEngine>(ussdSessionKey);
             int counter = 0;
             if (null == uSSDSessionModel)
@@ -56,12 +62,14 @@ namespace TreeNodeSample.Controllers
                  */ 
 
                 uSSDSessionModel = new USSDEngine();
-                uSSDSessionModel.UssdMenus = DataForm.GetAppForm(); // you can build a menu you want 
+                uSSDSessionModel.UssdMenus = DataForm.GetAppForm(); // you can build a menu you want open the form to see how the menu and forms are generated
                 
                 /*
                  * when user is already sign up bootstrap which form to show 
                  * this is just a demo yet to include many utils to the builder to make it more dynamic
-                 */ 
+                 * 
+                 */
+                
 
                 // this only gets called once when initilizing
                 uSSDSessionModel.UpdateUssdMenu();
