@@ -56,7 +56,14 @@ namespace TreeNodeSample.Controllers
                  */ 
 
                 uSSDSessionModel = new USSDEngine();
-                uSSDSessionModel.UssdMenus = DataForm.GetAppForm();
+                uSSDSessionModel.UssdMenus = DataForm.GetAppForm(); // you can build a menu you want 
+                
+                /*
+                 * when user is already sign up bootstrap which form to show 
+                 * this is just a demo yet to include many utils to the builder to make it more dynamic
+                 */ 
+
+                // this only gets called once when initilizing
                 uSSDSessionModel.UpdateUssdMenu();
                 uSSDSessionModel.SessionId = responseD["session_id"].ToString();
                 uSSDSessionModel.MobileNumber = responseD["msisdn"].ToString();
