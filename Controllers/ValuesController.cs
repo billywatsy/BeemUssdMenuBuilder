@@ -48,7 +48,7 @@ namespace TreeNodeSample.Controllers
              */
 
             // the USSDEngine is a routing framework to manage your request and response , know the menu and form you are at
-            // USSDEngine will soon add this to the nuget package manage 
+            // USSDEngine will soon add this to the nuget package manage , l have included a ddls for the sdk
             // it then uses events to call your methods 
             // basically you just build the menus , forms and events without need to worry about ussd callback logic 
             // check Data.GetAppForm to see how to build a form
