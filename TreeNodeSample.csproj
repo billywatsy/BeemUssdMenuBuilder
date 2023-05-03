@@ -45,9 +45,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BeemAfricaSDK">
-      <HintPath>..\..\..\Desktop\clean\aa_sync_files_\pc-files\BeemAfricaSDK\bin\Debug\BeemAfricaSDK.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -111,6 +108,10 @@
       <Private>True</Private>
       <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="USSDFormBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Desktop\clean\aa_sync_files_\pc-files\BeemAfricaSDK\bin\Debug\USSDFormBuilder.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -158,6 +159,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="BeemSdk\BeemContactHelper.cs" />
+    <Compile Include="BeemSdk\Class1.cs" />
+    <Compile Include="BeemSdk\HttpExtension.cs" />
+    <Compile Include="BeemSdk\Model\Address.cs" />
+    <Compile Include="BeemSdk\Model\AddressPaging.cs" />
+    <Compile Include="BeemSdk\Model\CommonResponse.cs" />
+    <Compile Include="BeemSdk\Model\CommonResponseMessage.cs" />
+    <Compile Include="BeemSdk\Model\Contact.cs" />
+    <Compile Include="BeemSdk\Model\Pagination.cs" />
     <Compile Include="Controllers\CacheManager.cs" />
     <Compile Include="Controllers\DataForm.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -220,7 +230,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="SDK\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

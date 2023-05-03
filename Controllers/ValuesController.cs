@@ -1,5 +1,4 @@
-﻿using BeemAfricaSDK.USSD.Builder.v1;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -10,11 +9,13 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http;
+using USSDFormBuilder.USSD.Builder.v1;
 
 namespace TreeNodeSample.Controllers
 {
     public class ValuesController : ApiController
     {
+        public static Dictionary<string, USSDEngine> _sesssions;
         [HttpPost]
         public HttpResponseMessage Beem()
         {
@@ -30,6 +31,9 @@ namespace TreeNodeSample.Controllers
             {
                 // return error
             }
+
+            if (_sesssions == null)
+                _sesssions = new Dictionary<string, USSDEngine>();
 
             JObject responseD = new JObject();
             JObject request = JObject.Parse(requestFromPost);
@@ -52,9 +56,10 @@ namespace TreeNodeSample.Controllers
             // it then uses events to call your methods 
             // basically you just build the menus , forms and events without need to worry about ussd callback logic 
             // check Data.GetAppForm to see how to build a form
-            USSDEngine uSSDSessionModel = CacheManager.GetCache<USSDEngine>(ussdSessionKey);
+            USSDEngine uSSDSessionModel = null;
+
             int counter = 0;
-            if (null == uSSDSessionModel)
+            if (!_sesssions.TryGetValue(ussdSessionKey, out uSSDSessionModel))
             {
                 /**
                  * Bootstrap your ussd application and put stuff your want its only loaded once
@@ -69,7 +74,6 @@ namespace TreeNodeSample.Controllers
                  * this is just a demo yet to include many utils to the builder to make it more dynamic
                  * 
                  */
-                
 
                 // this only gets called once when initilizing
                 uSSDSessionModel.UpdateUssdMenu();
@@ -79,7 +83,6 @@ namespace TreeNodeSample.Controllers
                 uSSDSessionModel.MetaData = new JObject();
                 uSSDSessionModel.MetaData["_counter"] = counter;
 
-                CacheManager.AddCache(ussdSessionKey, uSSDSessionModel, DateTime.Now.AddSeconds(30));
             }
             else
             { 
@@ -93,7 +96,7 @@ namespace TreeNodeSample.Controllers
 
             var data = uSSDSessionModel.ProcessRequest(userText);
 
-            CacheManager.Update(ussdSessionKey, data.Value);
+            _sesssions[ussdSessionKey] = data.Value;
 
             var command = "continue";
             if (data.Key == USSDState.ENDSESSION)
