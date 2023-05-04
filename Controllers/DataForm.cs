@@ -52,6 +52,13 @@ namespace TreeNodeSample.Controllers
                 return "Error processing request";
             } 
         }
+        public static HookResponse ShowUserProfile(USSDEngine uSSDSessionModel)
+        {
+            return new HookResponse()
+            {
+                Success = "Userid : 626cfd2f3166dd65"
+            };
+        }
         public static string Showprofile(USSDEngine uSSDSessionModel)
         {
             return "Userid : 626cfd2f3166dd65" ;
@@ -110,6 +117,17 @@ namespace TreeNodeSample.Controllers
                 {
                     Code = "profilename",
                     Text = "Profile Name",
+                    Forms = new List<USSDFormModel>()
+                    {
+                        new USSDFormModel()
+                        {
+                            Code = "profile",
+                            DisplayText = "Hi Profile",
+                            FormParameterName = "name" , 
+                            PreRenderForm = ShowUserProfile,
+                            FormType = FormType.DISPLAYANDCLOSE
+                        }
+                    },
                     OnFormEnd = Showprofile
                 }
            );

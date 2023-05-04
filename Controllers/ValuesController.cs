@@ -110,6 +110,13 @@ namespace TreeNodeSample.Controllers
 
             responseD["payload"] = responsePayLoad;
              
+
+            if(data.Key == USSDState.ENDSESSION)
+            {
+                // remove from sesssion
+                _sesssions.Remove(ussdSessionKey);
+            }
+
             return new HttpResponseMessage()
             {
                 Content = new StringContent(responseD.ToString(), Encoding.UTF8, "application/json"),
